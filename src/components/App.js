@@ -1,8 +1,9 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import styled from "styled-components";
+import BalancePage from "./BalancePage";
 import GlobalStyle from "./GlobalStyle";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
+import SignInPage from "./SignInPage";
+import SignUpPage from "./SignUpPage";
 
 function App() {
   return (
@@ -10,8 +11,9 @@ function App() {
     <GlobalStyle />
     <AppContainer>
       <Routes>
-        <Route path="/" element={<SignIn/>}/>
-        <Route path="/sign-up" element={<SignUp/>}/>
+        <Route path="/" element={<SignInPage/>}/>
+        <Route path="/sign-up" element={<SignUpPage/>}/>
+        <Route path="/balance" element={<BalancePage/>}/>
       </Routes>
     </AppContainer>
     </BrowserRouter>

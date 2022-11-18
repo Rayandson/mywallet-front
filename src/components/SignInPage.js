@@ -1,15 +1,37 @@
+import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
+import { useState } from "react"
+import axios from "axios"
 
-export default function SignIn() {
+export default function SignInPage() {
+    
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const navigate = useNavigate()
+
+    function signIn(event) {
+        axios.post("http://localhost:5000/sign-in", {email, password})
+        .then((res) => {
+
+            console.log(res)
+            setEmail("")
+            setPassword("")
+            navigate("/balance")
+        }).catch ((err) => {
+            alert(err.message)
+            })
+            event.preventDefault();
+    }
+
     return(
         <Container>
         <Logo>My Wallet</Logo>
-        <StyledForm>
-        <StyledInput type="email" placeholder="E-mail"/>
-        <StyledInput type="password" placeholder="Senha"/>
+        <StyledForm onSubmit={signIn}>
+        <StyledInput type="email" placeholder="E-mail" onChange={(e) => setEmail(e.target.value)} value={email}/>
+        <StyledInput type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password}/>
         <Botao type="submit" value="Entrar" />
         </StyledForm>
-        <p>Primeira vez ? <span>Cadastre-se!</span></p>
+        <p>Primeira vez ? <Link to="/sign-up" ><span>Cadastre-se!</span></Link></p>
         </Container>
     )
 }
@@ -29,6 +51,17 @@ background-color: #8C11BE;
         font-weight: 400;
         font-size: 15px;
         margin-top: 36px;
+        span {
+            cursor: pointer;
+        }
+        a {
+    text-decoration: none;
+    font-family: 'Raleway', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    color: #fff;
+}
     }
    
 `
