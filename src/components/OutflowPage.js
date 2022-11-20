@@ -5,22 +5,17 @@ import axios from "axios"
 import { TokenContext } from "../contexts/TokenContext"
 import { UserContext } from "../contexts/UserContext"
 
-export default function SignInPage() {
-    
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const {token, setToken} = useContext(TokenContext)
-    const {user, setUser} = useContext(UserContext)
+export default function OutflowPage() {
+    const [cashValue, setCashValue] = useState("")
+    const [description, setDescription] = useState("")
+    const {token} = useContext(TokenContext)
+    const {user} = useContext(UserContext)
     const navigate = useNavigate()
 
-    function signIn(event) {
-        axios.post("http://localhost:5000/sign-in", {email, password})
+    function save(event) {
+        axios.post("http://localhost:5000/transactions", {cashValue, description, type: "output", userId: user._id}, {headers: {token: token}})
         .then((res) => {
-            setToken(res.data.token)
-            setUser(res.data)
-            console.log(res.data)
-            setEmail("")
-            setPassword("")
+            console.log(res)
             navigate("/balance")
         }).catch ((err) => {
             alert(err.message)
@@ -30,13 +25,14 @@ export default function SignInPage() {
 
     return(
         <Container>
-        <Logo>My Wallet</Logo>
-        <StyledForm onSubmit={signIn}>
-        <StyledInput type="email" placeholder="E-mail" onChange={(e) => setEmail(e.target.value)} value={email}/>
-        <StyledInput type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password}/>
-        <Botao type="submit" value="Entrar" />
+        <Content>
+        <h1>Nova saída</h1>
+        <StyledForm onSubmit={save}>
+        <StyledInput type="number" placeholder="Valor" onChange={(e) => setCashValue(e.target.value)} value={cashValue}/>
+        <StyledInput placeholder="Descrição" onChange={(e) => setDescription(e.target.value)} value={description}/>
+        <Botao type="submit" value="Salvar saída" />
         </StyledForm>
-        <p>Primeira vez ? <Link to="/sign-up" ><span>Cadastre-se!</span></Link></p>
+        </Content>
         </Container>
     )
 }
@@ -46,9 +42,10 @@ width: 100vw;
 height: 100vh;
 display: flex;
 flex-direction: column;
-justify-content: center;
+justify-content: flex-start;
 align-items: center;
 background-color: #8C11BE;
+padding: 25px 0;
     p {
         color: #fff;
         font-family: 'Raleway', sans-serif;
@@ -59,22 +56,23 @@ background-color: #8C11BE;
         span {
             cursor: pointer;
         }
-        a {
-    text-decoration: none;
-    font-family: 'Raleway', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 15px;
-    color: #fff;
-}
     }
-   
+    h1 {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 700;
+            font-size: 26px;
+            color: #FFFFFF;
+            margin-bottom: 40px;
+        }
 `
-const Logo = styled.h1`
-    color: #FFFFFF;
-    font-family: 'Saira Stencil One', cursive;
-    font-size: 32px;
-    margin-bottom: 28px;
+
+const Content = styled.div`
+width: 326px;
+max-width: 800px;
+@media(max-width: 380px) {
+        width: 90vw;
+    }
+
 `
 const StyledForm = styled.form`
     display: flex;
@@ -101,8 +99,8 @@ const StyledInput = styled.input`
             font-family: 'Raleway', sans-serif;
             font-weight: 400;
         }
-    @media(max-width: 326px) {
-        width: 90vw;
+    @media(max-width: 380px) {
+        width: 100%;
     }
 `
 const Botao = styled.input`
@@ -113,7 +111,7 @@ border-radius: 5px;
 color: #FFFFFF;
 font-family: 'Raleway', sans-serif;
 font-weight: 700;
-@media(max-width: 326px) {
-        width: 90vw;
+@media(max-width: 380px) {
+        width: 100%;
     }
 `

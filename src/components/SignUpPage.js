@@ -87,7 +87,7 @@ const StyledForm = styled.form`
 
 const StyledInput = styled.input`
     width: 326px;
-    height: 58px;
+    height: 53px;
     background: #FFFFFF;
     border-radius: 5px;
     font-family: 'Raleway', sans-serif;
@@ -102,6 +102,9 @@ const StyledInput = styled.input`
             font-family: 'Raleway', sans-serif;
             font-weight: 400;
         }
+        @media(max-width: 326px) {
+        width: 90vw;
+    }
 `
 const Botao = styled.input`
 width: 326px;
@@ -111,4 +114,7 @@ border-radius: 5px;
 color: #FFFFFF;
 font-family: 'Raleway', sans-serif;
 font-weight: 700;
+@media(max-width: 326px) {
+        width: 90vw;
+    }
 `
