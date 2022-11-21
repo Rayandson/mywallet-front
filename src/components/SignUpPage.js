@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
+import { URL } from "../assets/URL"
 
 export default function SignUpPage() {
 
@@ -12,7 +13,7 @@ export default function SignUpPage() {
     const navigate = useNavigate()
 
     function signUp(event) {
-        axios.post("http://localhost:5000/sign-up", {name, email, password, passwordConfirmation})
+        axios.post(`${URL}/sign-up`, {name, email, password, passwordConfirmation})
         .then((res) => {
             console.log(res)
             navigate("/")

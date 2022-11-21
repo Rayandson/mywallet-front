@@ -4,6 +4,7 @@ import { useContext, useState } from "react"
 import axios from "axios"
 import { TokenContext } from "../contexts/TokenContext"
 import { UserContext } from "../contexts/UserContext"
+import { URL } from "../assets/URL.js"
 
 export default function SignInPage() {
     
@@ -14,7 +15,7 @@ export default function SignInPage() {
     const navigate = useNavigate()
 
     function signIn(event) {
-        axios.post("http://localhost:5000/sign-in", {email, password})
+        axios.post(`${URL}/sign-in`, {email, password})
         .then((res) => {
             setToken(res.data.token)
             setUser(res.data)

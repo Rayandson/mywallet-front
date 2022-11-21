@@ -5,6 +5,7 @@ import axios from "axios"
 import Arrow from "../assets/img/arrow.png"
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { AiOutlineMinusCircle } from "react-icons/ai";
+import { URL } from "../assets/URL"
 
 import "../style/icons.css"
 import { TokenContext } from "../contexts/TokenContext"
@@ -22,7 +23,7 @@ export default function BalancePage() {
     }
 
     useEffect(() => {
-        axios.get("http://localhost:5000/transactions", {headers: {token: token}})
+        axios.get(`${URL}/transactions`, {headers: {Authorization: `Bearer ${token}`}})
         .then((res) => {
             setTransactions(res.data.transactions)
             setBalance(res.data.balance)

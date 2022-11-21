@@ -4,6 +4,7 @@ import { useContext, useState } from "react"
 import axios from "axios"
 import { TokenContext } from "../contexts/TokenContext"
 import { UserContext } from "../contexts/UserContext"
+import { URL } from "../assets/URL"
 
 export default function OutflowPage() {
     const [cashValue, setCashValue] = useState("")
@@ -13,7 +14,7 @@ export default function OutflowPage() {
     const navigate = useNavigate()
 
     function save(event) {
-        axios.post("http://localhost:5000/transactions", {cashValue, description, type: "output", userId: user._id}, {headers: {token: token}})
+        axios.post(`${URL}/transactions`, {cashValue, description, type: "output", userId: user._id}, {headers: {Authorization: `Bearer ${token}`}})
         .then((res) => {
             console.log(res)
             navigate("/balance")
