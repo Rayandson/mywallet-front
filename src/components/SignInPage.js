@@ -113,6 +113,7 @@ border-radius: 5px;
 color: #FFFFFF;
 font-family: 'Raleway', sans-serif;
 font-weight: 700;
+cursor: pointer;
 @media(max-width: 326px) {
         width: 90vw;
     }

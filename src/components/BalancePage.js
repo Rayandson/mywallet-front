@@ -117,7 +117,7 @@ export default function BalancePage() {
                 })}
                     
                 </FlowDiv>
-                <Balance>
+                <Balance balance={balance}>
                     <h2>Saldo</h2>
                     <p>{balance}</p>
                 </Balance>
@@ -177,6 +177,7 @@ h1 {
 img {
     width: 23px;
     height: 23px;
+    cursor: pointer;
 }
 `
 
@@ -202,7 +203,6 @@ const FlowDiv = styled.ul`
     justify-content: center;
     align-items: center;
     overflow-y: hidden;
-    /* background-color: red; */
 `
 
 const Balance = styled.div`
@@ -219,7 +219,7 @@ justify-content: space-between;
         font-family: 'Raleway', sans-serif;
         font-size: 16px;
         font-weight: 400;
-        color: #03AC00;
+        color:${props => Number(props.balance) > 0 ? "#03AC00" : "#C70000"};
     }
 `
 const BotoesDiv = styled.div`
@@ -239,6 +239,7 @@ margin-top: 13px;
 color: #fff;
 font-family: 'Raleway', sans-serif;
 font-weight: 700;
+cursor: pointer;
     div {
         width: 50%;
         height: 100%;
