@@ -111,7 +111,7 @@ export default function BalancePage() {
                     return(
                     <Item>
                         <ItemTitle><span>{t.date}</span>{t.description}</ItemTitle>
-                        <Cash>{t.cashValue}</Cash>
+                        <Cash type={t.type}>{t.cashValue}</Cash>
                     </Item>
                     )
                 })}
@@ -196,10 +196,13 @@ const BalanceDiv = styled.div`
 
 const FlowDiv = styled.ul`
     width: 100%;
+    max-height: 90%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow-y: hidden;
+    /* background-color: red; */
 `
 
 const Balance = styled.div`
@@ -268,7 +271,8 @@ const Cash = styled.p`
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
     font-weight: 400;
-    color: #C70000;
+    color: ${props => props.type === "input" ? "#03AC00" : "#C70000"}
+    /* color: #C70000; */
 `
 
 const MessageDiv = styled.div`
